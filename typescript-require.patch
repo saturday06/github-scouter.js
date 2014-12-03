@@ -1,0 +1,11 @@
+--- node_modules/typescript-require/typings/lib.d.ts.orig	2014-11-19 00:00:00.932512555 +0900
++++ node_modules/typescript-require/typings/lib.d.ts	2014-11-19 00:00:00.992564798 +0900
+@@ -8930,7 +8930,7 @@
+ }
+ 
+ interface MSNamespaceInfoCollection {
+-    length: number;
++    length: string;
+     add(namespace?: string, urn?: string, implementationUrl?: any): Object;
+     item(index: any): Object;
+     [index: string]: Object;
