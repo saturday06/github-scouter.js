@@ -3,25 +3,19 @@
 module.exports = (config) => {
     config.set({
         frameworks: ['jasmine', 'mocha'],
-        files: ['src/test/*.ts'],
+        files: ['test/*.test.ts'],
         browsers: ['PhantomJS'],
+        browserNoActivityTimeout: 100 * 1000,
+        singleRun: true,
+
+    module: {
+        loaders: [
+            { test: /\.ts$/, loader: "typescript-loader" }
+        ]
+    },
 
         preprocessors: {
-            'src/test/**/*.ts': ['webpack']
-        },
-
-        webpack: {
-            module: {
-                loaders: [
-                    { test: /\.ts$/, loader: "typescript-loader" }
-                ]
-            }
-        },
-
-        webpackServer: {
-            stats: {
-                colors: true
-            }
+            'test/*.test.ts': ['webpack']
         }
     });
 };
