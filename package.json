@@ -8,6 +8,9 @@
   "bin": {
     "github-scouter": "lib/cli.js"
   },
+  "scripts": {
+    "prepublish": "node_modules/.bin/gulp tsc"
+  },
   "dependencies": {
     "superagent": "^0.21.0",
     "lodash": "^2.4.1",
