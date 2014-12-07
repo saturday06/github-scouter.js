@@ -27,7 +27,7 @@ $ github-scouter saturday06
 { atk: 1130, int: 13, agi: 0 }
 ```
 
-# Devalopment
+# Development
 
 ```sh
 npm install
