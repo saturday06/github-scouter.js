@@ -4,12 +4,9 @@
   "description": "A Scouter to measure the power level for github",
   "author": "Isamu Mogi <isamu@leafytree.jp>",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "index.js",
   "bin": {
-    "github-scouter": "lib/cli.js"
-  },
-  "scripts": {
-    "prepublish": "node_modules/.bin/gulp tsc"
+    "github-scouter": "bin/cli.js"
   },
   "dependencies": {
     "superagent": "^0.21.0",
