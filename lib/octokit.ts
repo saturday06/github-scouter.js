@@ -39,7 +39,7 @@ class Octokit {
                 }
             })
     }
-    
+
     organizations(userName: string, onSuccess: (repositories: any[]) => any, onFailure: (error) => any, result = [], page = 1) {
         // TODO: Embedding unchecked string is danger.
         this.agent
