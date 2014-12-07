@@ -4,6 +4,7 @@
   "description": "あなたのGitHub戦闘力を測定します",
   "author": "Isamu Mogi <isamu@leafytree.jp>",
   "license": "MIT",
+  "main": "lib/index.js",
   "bin": {
     "github-scouter": "lib/cli.js"
   },
