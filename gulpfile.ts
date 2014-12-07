@@ -48,7 +48,7 @@ function start_mock_server() {
 }
 
 gulp.task('webpack', () => {
-    return gulp.src('lib/github-scouter.ts')
+    return gulp.src('lib/browser.ts')
         .pipe(webpack(_.assign(
             webpackConfig, {
                 devtool: "source-map",
