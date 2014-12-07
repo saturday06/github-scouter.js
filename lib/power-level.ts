@@ -10,6 +10,14 @@ class PowerLevel {
     total(): number {
         return this.atk + this.int + this.agi
     }
+
+    toString(): string {
+        // TODO: i18n
+        return "戦闘力: " + this.total() + "\n"
+            + "攻撃力: " + this.atk
+            + " 知力: " + this.int
+            + " すばやさ: " + this.agi
+    }
 }
 
 exports.PowerLevel = PowerLevel

@@ -24,7 +24,8 @@ $ github-scouter [github ID]
 
 ```
 $ github-scouter saturday06
-{ atk: 1130, int: 13, agi: 0 }
+戦闘力: 1143
+攻撃力: 1130 知力: 13 すばやさ: 0
 ```
 
 # Development
