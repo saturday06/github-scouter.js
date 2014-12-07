@@ -8,12 +8,6 @@ module.exports = (config) => {
         browserNoActivityTimeout: 100 * 1000,
         singleRun: true,
 
-    module: {
-        loaders: [
-            { test: /\.ts$/, loader: "typescript-loader" }
-        ]
-    },
-
         preprocessors: {
             'test/*.test.ts': ['webpack']
         }
