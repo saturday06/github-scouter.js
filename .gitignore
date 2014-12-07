@@ -1,7 +1,6 @@
 /browser/
 /node_modules/
 /tmp/
-/typings/
 /.c9/
 /npm-debug.log
 /lib/*.js
