@@ -1,5 +1,5 @@
 {
-  "name": "github-scouter.js",
+  "name": "github-scouter",
   "version": "0.0.1",
   "description": "A Scouter to measure the power level for github",
   "author": "Isamu Mogi <isamu@leafytree.jp>",
