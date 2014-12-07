@@ -1,7 +1,7 @@
 {
   "name": "github-scouter.js",
   "version": "0.0.1",
-  "description": "あなたのGitHub戦闘力を測定します",
+  "description": "A Scouter to measure the power level for github",
   "author": "Isamu Mogi <isamu@leafytree.jp>",
   "license": "MIT",
   "main": "lib/index.js",
