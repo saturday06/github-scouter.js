@@ -11,7 +11,7 @@
   "dependencies": {
     "superagent": "^0.21.0",
     "lodash": "^2.4.1",
-    "typescript-require": "^0.2.6"
+    "typescript-require": "git+https://saturday06@github.com/saturday06/typescript-require.git#e1e319f11bee4fc464a45ffb021a6c6b84f13e1b"
   },
   "devDependencies": {
     "async": "^0.9.0",

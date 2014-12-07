@@ -9,7 +9,6 @@ github-scouter.js
 
 ```sh
 npm install
-patch -p0 < typescript-require.patch
 export PATH="$PWD/node_modules/.bin:$PATH"
 tsd reinstall
 gulp
