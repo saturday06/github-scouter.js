@@ -1,0 +1,17 @@
+{
+  "name": "github-scouter",
+  "main": "browser/github-scouter.js",
+  "version": "0.0.7",
+  "homepage": "https://github.com/saturday06/github-scouter.js",
+  "authors": [
+    "Isamu Mogi <isamu@leafytree.jp>"
+  ],
+  "description": "A Scouter to measure the power level for github",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
