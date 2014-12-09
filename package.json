@@ -1,6 +1,6 @@
 {
   "name": "github-scouter",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A Scouter to measure the power level for github",
   "author": "Isamu Mogi <isamu@leafytree.jp>",
   "license": "MIT",
