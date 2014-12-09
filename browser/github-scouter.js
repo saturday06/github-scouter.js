@@ -100,7 +100,10 @@
 	        var _this = this;
 	        if (result === void 0) { result = []; }
 	        if (page === void 0) { page = 1; }
-	        // TODO: Embedding unchecked string is danger.
+	        if (!this.validUserName(userName)) {
+	            onFailure("Invalid user name");
+	            return;
+	        }
 	        this.agent.get(this.baseUrl + '/users/' + userName + '/repos').query({ page: page, per_page: this.perPage }).set(this.requestHeaders()).end(function (response) {
 	            if (response.error) {
 	                onFailure(response.error);
@@ -119,7 +122,10 @@
 	        var _this = this;
 	        if (result === void 0) { result = []; }
 	        if (page === void 0) { page = 1; }
-	        // TODO: Embedding unchecked string is danger.
+	        if (!this.validUserName(userName)) {
+	            onFailure("Invalid user name");
+	            return;
+	        }
 	        this.agent.get(this.baseUrl + '/users/' + userName + '/orgs').query({ page: page, per_page: this.perPage }).set(this.requestHeaders()).end(function (response) {
 	            if (response.error) {
 	                onFailure(response.error);
@@ -135,7 +141,10 @@
 	        });
 	    };
 	    Octokit.prototype.organization = function (organizationName, onSuccess, onFailure) {
-	        // TODO: Embedding unchecked string is danger.
+	        if (!this.validOrganizationName(organizationName)) {
+	            onFailure("Invalid organization name");
+	            return;
+	        }
 	        this.agent.get(this.baseUrl + '/orgs/' + organizationName).set(this.requestHeaders()).end(function (error, response) {
 	            if (response.error) {
 	                onFailure(response.error);
@@ -148,7 +157,10 @@
 	        var _this = this;
 	        if (result === void 0) { result = []; }
 	        if (page === void 0) { page = 1; }
-	        // TODO: Embedding unchecked string is danger.
+	        if (!this.validOrganizationName(organizationName)) {
+	            onFailure("Invalid organization name");
+	            return;
+	        }
 	        this.agent.get(this.baseUrl + '/orgs/' + organizationName + '/members').query({ page: page, per_page: this.perPage }).set(this.requestHeaders()).end(function (error, response) {
 	            if (response.error) {
 	                onFailure(response.error);
@@ -162,6 +174,12 @@
 	                _this.organizationMembers(organizationName, onSuccess, onFailure, result, page + 1);
 	            }
 	        });
+	    };
+	    Octokit.prototype.validUserName = function (name) {
+	        return /^[a-zA-Z0-9-]+$/.test(name);
+	    };
+	    Octokit.prototype.validOrganizationName = function (name) {
+	        return this.validUserName(name);
 	    };
 	    return Octokit;
 	})();

@@ -1,10 +1,10 @@
-///<reference path='typings/node/node.d.ts'/>
-///<reference path="typings/gulp/gulp.d.ts" />
+declare var __dirname, process, require
 
-import gulp = require('gulp')
+var gulp = require('gulp')
 var karma = require('karma').server
 var tslint = require('gulp-tslint')
 var tsc = require('gulp-tsc')
+var tsd = require('gulp-tsd')
 var jasmine = require('gulp-jasmine')
 var runSequence = require('run-sequence')
 var child_process = require('child_process')
@@ -47,7 +47,7 @@ function start_mock_server() {
     return server
 }
 
-gulp.task('webpack', () => {
+gulp.task('webpack', ['tsd'], () => {
     return gulp.src('lib/browser.ts')
         .pipe(webpack(_.assign(
             webpackConfig, {
@@ -94,13 +94,13 @@ gulp.task('test-node', ['tsc'], () => {
         })
 })
 
-gulp.task('tsc', () => {
+gulp.task('tsc', ['tsd'], () => {
     return gulp.src(src)
         .pipe(tsc())
         .pipe(gulp.dest('.'))
 })
 
-gulp.task('tslint', () => {
+gulp.task('tslint', ['tsd'], () => {
     return gulp.src(src)
         .pipe(tslint())
         .pipe(tslint.report())
@@ -112,6 +112,14 @@ gulp.task('test', () => {
 
 gulp.task('guard', () => {
     gulp.watch(src, ['test'])
+})
+
+
+gulp.task('tsd', function (done) {
+    tsd({
+        command: 'reinstall',
+        config: './tsd.json'
+    }, done)
 })
 
 gulp.task('default', ['guard'])
