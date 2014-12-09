@@ -9,8 +9,8 @@
     "github-scouter": "bin/cli.js"
   },
   "dependencies": {
-    "superagent": "^0.21.0",
     "lodash": "^2.4.1",
+    "superagent": "^0.21.0",
     "typescript-require": "git+https://saturday06@github.com/saturday06/typescript-require.git#e1e319f11bee4fc464a45ffb021a6c6b84f13e1b"
   },
   "devDependencies": {
