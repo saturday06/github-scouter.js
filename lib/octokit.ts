@@ -21,7 +21,10 @@ class Octokit {
     }
 
     repositories(userName: string, onSuccess: (repositories: any[]) => any, onFailure: (error) => any, result = [], page = 1) {
-        // TODO: Embedding unchecked string is danger.
+        if (!this.validUserName(userName)) {
+            onFailure("Invalid user name")
+            return
+        }
         this.agent
             .get(this.baseUrl + '/users/' + userName + '/repos')
             .query({page: page, per_page: this.perPage})
@@ -41,7 +44,10 @@ class Octokit {
     }
 
     organizations(userName: string, onSuccess: (repositories: any[]) => any, onFailure: (error) => any, result = [], page = 1) {
-        // TODO: Embedding unchecked string is danger.
+        if (!this.validUserName(userName)) {
+            onFailure("Invalid user name")
+            return
+        }
         this.agent
             .get(this.baseUrl + '/users/' + userName + '/orgs')
             .query({page: page, per_page: this.perPage})
@@ -61,7 +67,10 @@ class Octokit {
     }
 
     organization(organizationName: string, onSuccess: (organization) => any, onFailure: (error) => any) {
-        // TODO: Embedding unchecked string is danger.
+        if (!this.validOrganizationName(organizationName)) {
+            onFailure("Invalid organization name")
+            return
+        }
         this.agent
             .get(this.baseUrl + '/orgs/' + organizationName)
             .set(this.requestHeaders())
@@ -75,7 +84,10 @@ class Octokit {
     }
 
     organizationMembers(organizationName: string, onSuccess: (members: any[]) => any, onFailure: (error) => any, result = [], page = 1) {
-        // TODO: Embedding unchecked string is danger.
+        if (!this.validOrganizationName(organizationName)) {
+            onFailure("Invalid organization name")
+            return
+        }
         this.agent
             .get(this.baseUrl + '/orgs/' + organizationName + '/members')
             .query({page: page, per_page: this.perPage})
@@ -92,6 +104,14 @@ class Octokit {
                     this.organizationMembers(organizationName, onSuccess, onFailure, result, page + 1)
                 }
             })
+    }
+
+    validUserName(name: string): boolean {
+        return /^[a-zA-Z0-9-]+$/.test(name)
+    }
+
+    validOrganizationName(name: string): boolean {
+        return this.validUserName(name)
     }
 }
 

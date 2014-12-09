@@ -19,6 +19,17 @@ describe("Octokit", () => {
                 expect('').toBe(error)
             })
         })
+
+        it("avoids invalid input", (done) => {
+            octokit.repositories("wo$rld", (repositories) => {
+                // fail()
+                expect("failure").toBe("success")
+                done()
+            }, (error) => {
+                expect(error).toEqual("Invalid user name")
+                done()
+            })
+        })
     })
 
     describe("#organizations", () => {
@@ -28,6 +39,17 @@ describe("Octokit", () => {
                 done()
             }, (error) => {
                 expect('').toBe(error)
+            })
+        })
+
+        it("avoids invalid input", (done) => {
+            octokit.organizations("wo%ld", (organizations) => {
+                // fail()
+                expect("failure").toBe("success")
+                done()
+            }, (error) => {
+                expect(error).toEqual("Invalid user name")
+                done()
             })
         })
     })
@@ -41,6 +63,17 @@ describe("Octokit", () => {
                 expect('').toBe(error)
             })
         })
+
+        it("avoids invalid input", (done) => {
+            octokit.organization("wo../ld", (organization) => {
+                // fail()
+                expect("failure").toBe("success")
+                done()
+            }, (error) => {
+                expect(error).toEqual("Invalid organization name")
+                done()
+            })
+        })
     })
 
     describe("#organizationMembers", () => {
@@ -51,6 +84,33 @@ describe("Octokit", () => {
             }, (error) => {
                 expect('').toBe(error)
             })
+        })
+
+        it("avoids invalid input", (done) => {
+            octokit.organizationMembers("wo/..ld", (members) => {
+                // fail()
+                expect("failure").toBe("success")
+                done()
+            }, (error) => {
+                expect(error).toEqual("Invalid organization name")
+                done()
+            })
+        })
+    })
+
+    describe("#validUserName", () => {
+        it("works!", () => {
+            expect(octokit.validUserName("foo-bar1")).toBe(true)
+            expect(octokit.validUserName("foo_bar2")).toBe(false)
+            expect(octokit.validUserName("foo/bar3")).toBe(false)
+        })
+    })
+
+    describe("#validOrganizationName", () => {
+        it("works!", () => {
+            expect(octokit.validOrganizationName("foo-bar1")).toBe(true)
+            expect(octokit.validOrganizationName("foo_bar2")).toBe(false)
+            expect(octokit.validOrganizationName("foo/bar3")).toBe(false)
         })
     })
 })
