@@ -13,6 +13,11 @@ app.get('/users/hello/repos', (req, res) => {
     ])
 })
 
+app.get('/users/norepos/repos', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    res.send([])
+})
+
 app.get('/users/hello/orgs', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*')
     res.send([

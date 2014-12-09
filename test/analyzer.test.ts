@@ -16,5 +16,13 @@ describe("Analyzer", () => {
                 done()
             })
         })
+
+        it("works for a user with no repository", (done) => {
+            var analyzer = new (require("../lib/analyzer.ts")).Analyzer(octokit, "norepos", () => {}, () => {})
+            analyzer.atk((atk) => {
+                expect(atk).toBe(0)
+                done()
+            })
+        })
     })
 })

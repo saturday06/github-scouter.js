@@ -19,7 +19,7 @@ class Analyzer {
                 return this.repositoryAtk(repository)
             }).reduce((l, r) => {
                 return l + r
-            }).value()
+            }).value() || 0
             callback(atk)
         })
     }
