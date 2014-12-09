@@ -5,6 +5,7 @@ require('typescript-require')()
 
 var userName = process.argv[2]
 if (!userName) {
+    console.log("Usage: github-scouter [GitHub ID]")
     process.exit(1)
 }
 
