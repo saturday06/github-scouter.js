@@ -18,6 +18,14 @@ class PowerLevel {
             + " 知力: " + this.int
             + " すばやさ: " + this.agi
     }
+
+    toJSONString(): string {
+        return JSON.stringify({
+            atk: this.atk,
+            int: this.int,
+            agi: this.agi,
+        })
+    }
 }
 
 exports.PowerLevel = PowerLevel
