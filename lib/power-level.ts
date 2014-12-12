@@ -1,10 +1,12 @@
 ///<reference path='../typings/node/node.d.ts'/>
+///<reference path='../typings/moment/moment.d.ts'/>
 
 /**
  * http://dragonball.wikia.com/wiki/Power_level
  */
 class PowerLevel {
-    constructor(public atk: number, public int: number, public agi: number) {
+    constructor(public atk: number, public int: number, public agi: number,
+                public cached: boolean = false, public timestamp: Moment = (require("moment"))()) {
     }
 
     total(): number {
@@ -13,10 +15,15 @@ class PowerLevel {
 
     toString(): string {
         // TODO: i18n
-        return "戦闘力: " + this.total() + "\n"
+        var str = "戦闘力: " + this.total() + "\n"
             + "攻撃力: " + this.atk
             + " 知力: " + this.int
             + " すばやさ: " + this.agi
+        if (this.cached) {
+            str += "\n\nキャッシュから取得しました"
+                + "\nデータ取得時刻: " + this.timestamp.format("YYYY-MM-DDTHH:mm:ssZZ")
+        }
+        return str
     }
 
     toJSONString(): string {
@@ -24,6 +31,8 @@ class PowerLevel {
             atk: this.atk,
             int: this.int,
             agi: this.agi,
+            cached: this.cached,
+            timestamp: this.timestamp.unix()
         })
     }
 }

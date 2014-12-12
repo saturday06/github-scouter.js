@@ -19,6 +19,9 @@
     },
     "karma-jasmine/karma-jasmine.d.ts": {
       "commit": "bd2377d9f89860c796bb678f05f3c1326ba8c842"
+    },
+    "moment/moment.d.ts": {
+      "commit": "017cb72c292ba24e70afad99c12bc04778b7261c"
     }
   }
 }
