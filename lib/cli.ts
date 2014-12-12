@@ -12,6 +12,8 @@ if (!userName) {
 var scouter = new (require('./github-scouter.ts')).GithubScouter()
 scouter.measure(userName, (powerLevel) => {
     console.log(powerLevel.toString())
+    process.exit(0)
 }, (error) => {
     console.log(error)
+    process.exit(1)
 })
