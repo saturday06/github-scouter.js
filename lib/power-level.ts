@@ -7,6 +7,15 @@
 class PowerLevel {
     constructor(public atk: number, public int: number, public agi: number,
                 public cached: boolean = false, public timestamp: Moment = (require("moment"))()) {
+        // TODO: moment usage
+    }
+
+    static fromJSONString(json: string): PowerLevel {
+        var obj = JSON.parse(json)
+        // TODO: validation
+        // TODO: moment usage
+        return new PowerLevel(obj.attack, obj.intelligence, obj.agility,
+                              !!obj.cached, (require("moment")).unix(obj.timestamp))
     }
 
     total(): number {

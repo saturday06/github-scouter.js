@@ -8,4 +8,19 @@ describe("PowerLevel", () => {
             expect(powerLevel.total()).toBe(6)
         })
     })
+
+    describe(".fromJSON", () => {
+        it("works!", () => {
+            var powerLevel = new (require('../lib/power-level.ts')).PowerLevel.fromJSONString("{ \
+                \"attack\": 10,        \
+                \"intelligence\": 20,  \
+                \"agility\": 30,       \
+                \"timestamp\": 40      \
+            }")
+            expect(powerLevel.atk).toBe(10)
+            expect(powerLevel.int).toBe(20)
+            expect(powerLevel.agi).toBe(30)
+            expect(powerLevel.timestamp.unix()).toBe(40)
+        })
+    })
 })
