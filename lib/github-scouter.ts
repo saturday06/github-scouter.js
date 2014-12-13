@@ -8,12 +8,13 @@
 class GithubScouter {
     private octokit: Octokit
     
-    constructor(private baseUrl: string = 'https://api.github.com') {
+    constructor(private baseUrl: string = 'https://api.github.com',
+                private cacheBaseUrl: string = 'http://githubscouter.leafytree.jp') {
         this.octokit = new (require('./octokit.ts')).Octokit(baseUrl)
     }
 
     measure(userName: string, onSuccess: (powerLevel: PowerLevel) => any, onFailure: (error) => any) {
-        var analyzer = new (require('./analyzer.ts')).Analyzer(this.octokit, userName, onSuccess, onFailure)
+        var analyzer = new (require('./analyzer.ts')).Analyzer(this.octokit, userName, onSuccess, onFailure, this.cacheBaseUrl)
         analyzer.analyze()
     }
 }

@@ -60,6 +60,33 @@ app.get('/orgs/nicopad/members', (req, res) => {
     res.send(all)
 })
 
+app.get('/users/ratelimited-cached/repos', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    // TODO: header
+    res.status(403).send('Oops!')
+})
+
+app.get('/users/ratelimited-nocache/repos', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    // TODO: header
+    res.status(403).send('Oops!')
+})
+
+app.get('/cache/powerLevels/ratelimited-cached', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    res.send({
+        attack: 1000,
+        intelligence: 2000,
+        agility: 3000,
+        timestamp: 4000
+    })
+})
+
+app.get('/cache/powerLevels/ratelimited-nocache', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+    res.status(404).send('Oops!')
+})
+
 var port = 3000
 app.listen(port)
 console.log('mock-server is listening on port ' + port)

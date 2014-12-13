@@ -6,11 +6,39 @@ var _ = require('lodash')
 
 class Analyzer {
     private cachedRepositories: any[]
+    private agent
 
     constructor(private octokit: Octokit,
                 private userName: string,
                 private onSuccess: (powerLevel: PowerLevel) => any,
-                private onFailure: (error) => any) {
+                private onFailure: (error) => any,
+                private cacheBaseUrl: string) {
+        this.agent = require('superagent')
+        this.onFailure = (error) => {
+            if (error.status != 403) {
+                onFailure(error)
+                return
+            }
+
+            // TODO: split function
+            this.agent
+                .get(cacheBaseUrl + '/powerLevels/' + userName) // TODO: validation?
+                .end((response) => {
+                    if (response.error) {
+                        onFailure([error, response.error])
+                        return
+                    }
+                    try {
+                        // TODO: ...
+                        var powerLevel = new (require('./power-level.ts')).PowerLevel(response.text)
+                        powerLevel.cached = true
+                        onSuccess(powerLevel)
+                    } catch (e) {
+                        onFailure(e)
+                        return
+                    }
+                })
+        }
     }
 
     atk(callback: (atk: number) => any) {
