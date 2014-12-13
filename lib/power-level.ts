@@ -28,9 +28,9 @@ class PowerLevel {
 
     toJSONString(): string {
         return JSON.stringify({
-            atk: this.atk,
-            int: this.int,
-            agi: this.agi,
+            attack: this.atk,
+            intelligence: this.int,
+            agility: this.agi,
             cached: this.cached,
             timestamp: this.timestamp.unix()
         })
