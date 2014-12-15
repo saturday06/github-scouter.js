@@ -15,7 +15,7 @@ class Analyzer {
                 private cacheBaseUrl: string) {
         this.agent = require('superagent')
         this.onFailure = (error) => {
-            if (error.status != 403) {
+            if (!cacheBaseUrl || error.status != 403) {
                 onFailure(error)
                 return
             }

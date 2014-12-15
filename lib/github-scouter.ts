@@ -2,14 +2,17 @@
 ///<reference path='octokit.ts'/>
 ///<reference path='power-level.ts'/>
 
+var API_URL = 'https://api.github.com'
+var CACHE_URL = 'http://githubscouter.leafytree.jp'
+
 /**
  * http://dragonball.wikia.com/wiki/Scouter
  */
 class GithubScouter {
     private octokit: Octokit
     
-    constructor(private baseUrl: string = 'https://api.github.com',
-                private cacheBaseUrl: string = 'http://githubscouter.leafytree.jp') {
+    constructor(private baseUrl: string = API_URL,
+                private cacheBaseUrl: string = CACHE_URL) {
         this.octokit = new (require('./octokit.ts')).Octokit(baseUrl)
     }
 
@@ -20,3 +23,5 @@ class GithubScouter {
 }
 
 exports.GithubScouter = GithubScouter
+exports.API_URL = API_URL
+exports.CACHE_URL = CACHE_URL

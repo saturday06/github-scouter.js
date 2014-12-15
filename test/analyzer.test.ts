@@ -46,6 +46,21 @@ describe("Analyzer", () => {
                 analyzer.analyze()
             })
 
+            it("doesn't work if cache exists but cache is disabled", (done) => {
+                // TODO: require
+                var onSuccess = (powerLevel) => {
+                    console.log(powerLevel)
+                    expect("onFailure").toBe("onSuccess")
+                    done()
+                }
+                var onFailure = (e) => {
+                    done()
+                }
+                var analyzer = new (require("../lib/analyzer.ts")).Analyzer(
+                    octokit, "ratelimited-cached", onSuccess, onFailure)
+                analyzer.analyze()
+            })
+
             it("doesn't work if cache doesn't exist", (done) => {
                 // TODO: require
                 var onSuccess = (powerLevel) => {
