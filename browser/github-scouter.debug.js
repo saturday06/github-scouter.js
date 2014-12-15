@@ -19356,4 +19356,4 @@
 
 /***/ }
 /******/ ])
-//# sourceMappingURL=github-scouter.js.map
+//# sourceMappingURL=github-scouter.debug.js.map
