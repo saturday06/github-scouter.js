@@ -34,6 +34,10 @@ describe("Analyzer", () => {
             it("works if cache exists", (done) => {
                 // TODO: require
                 var onSuccess = (powerLevel) => {
+                    expect(powerLevel.atk).toBe(1000)
+                    expect(powerLevel.int).toBe(2000)
+                    expect(powerLevel.agi).toBe(3000)
+                    expect(powerLevel.timestamp.unix()).toBe(4000)
                     done()
                 }
                 var onFailure = (e) => {

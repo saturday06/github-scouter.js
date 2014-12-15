@@ -30,7 +30,7 @@ class Analyzer {
                     }
                     try {
                         // TODO: ...
-                        var powerLevel = new (require('./power-level.ts')).PowerLevel(response.text)
+                        var powerLevel = new (require('./power-level.ts')).PowerLevel.fromJSONString(response.text)
                         powerLevel.cached = true
                         onSuccess(powerLevel)
                     } catch (e) {
