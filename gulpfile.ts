@@ -47,6 +47,19 @@ function start_mock_server() {
     return server
 }
 
+gulp.task('webpack-debug', ['tsd'], () => {
+    return gulp.src('lib/browser.ts')
+        .pipe(webpack(_.assign(
+            webpackConfig, {
+                devtool: "source-map",
+                debug: true,
+                output: {
+                    filename: "github-scouter.debug.js"
+                }
+            })))
+        .pipe(gulp.dest('browser/'))
+})
+
 gulp.task('webpack', ['tsd'], () => {
     return gulp.src('lib/browser.ts')
         .pipe(webpack(_.assign(
@@ -107,7 +120,7 @@ gulp.task('tslint', ['tsd'], () => {
 })
 
 gulp.task('test', () => {
-    runSequence('tsc', 'tslint', 'test-node', 'test-browser', 'webpack-min')
+    runSequence('tsc', 'tslint', 'webpack-debug', 'test-node', 'test-browser')
 })
 
 gulp.task('guard', () => {
