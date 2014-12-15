@@ -85,14 +85,14 @@
 
 	///<reference path='../typings/node/node.d.ts'/>
 	///<reference path='../typings/superagent/superagent.d.ts'/>
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(4);
 	var Octokit = (function () {
 	    function Octokit(baseUrl, token) {
 	        if (token === void 0) { token = undefined; }
 	        this.baseUrl = baseUrl;
 	        this.token = token;
 	        this.perPage = 100;
-	        this.agent = __webpack_require__(6);
+	        this.agent = __webpack_require__(5);
 	    }
 	    Octokit.prototype.requestHeaders = function () {
 	        var result = {};
@@ -199,7 +199,7 @@
 	///<reference path='../typings/node/node.d.ts'/>
 	///<reference path='octokit.ts'/>
 	///<reference path='power-level.ts'/>
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(4);
 	var Analyzer = (function () {
 	    function Analyzer(octokit, userName, onSuccess, onFailure, cacheBaseUrl) {
 	        var _this = this;
@@ -208,7 +208,7 @@
 	        this.onSuccess = onSuccess;
 	        this.onFailure = onFailure;
 	        this.cacheBaseUrl = cacheBaseUrl;
-	        this.agent = __webpack_require__(6);
+	        this.agent = __webpack_require__(5);
 	        this.onFailure = function (error) {
 	            if (!cacheBaseUrl || error.status != 403) {
 	                onFailure(error);
@@ -222,7 +222,7 @@
 	                }
 	                try {
 	                    // TODO: ...
-	                    var powerLevel = new (__webpack_require__(4)).PowerLevel(response.text);
+	                    var powerLevel = new (__webpack_require__(6)).PowerLevel.fromJSONString(response.text);
 	                    powerLevel.cached = true;
 	                    onSuccess(powerLevel);
 	                }
@@ -315,7 +315,7 @@
 	        this.atk(function (atk) {
 	            _this.int(function (int) {
 	                _this.agi(function (agi) {
-	                    _this.onSuccess(new (__webpack_require__(4)).PowerLevel(atk, int, agi));
+	                    _this.onSuccess(new (__webpack_require__(6)).PowerLevel(atk, int, agi));
 	                });
 	            });
 	        });
@@ -328,57 +328,6 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	///<reference path='../typings/node/node.d.ts'/>
-	///<reference path='../typings/moment/moment.d.ts'/>
-	/**
-	 * http://dragonball.wikia.com/wiki/Power_level
-	 */
-	var PowerLevel = (function () {
-	    function PowerLevel(atk, int, agi, cached, timestamp) {
-	        if (cached === void 0) { cached = false; }
-	        if (timestamp === void 0) { timestamp = (__webpack_require__(10))(); }
-	        this.atk = atk;
-	        this.int = int;
-	        this.agi = agi;
-	        this.cached = cached;
-	        this.timestamp = timestamp;
-	        // TODO: moment usage
-	    }
-	    PowerLevel.fromJSONString = function (json) {
-	        var obj = JSON.parse(json);
-	        // TODO: validation
-	        // TODO: moment usage
-	        return new PowerLevel(obj.attack, obj.intelligence, obj.agility, !!obj.cached, (__webpack_require__(10)).unix(obj.timestamp));
-	    };
-	    PowerLevel.prototype.total = function () {
-	        return this.atk + this.int + this.agi;
-	    };
-	    PowerLevel.prototype.toString = function () {
-	        // TODO: i18n
-	        var str = "戦闘力: " + this.total() + "\n" + "攻撃力: " + this.atk + " 知力: " + this.int + " すばやさ: " + this.agi;
-	        if (this.cached) {
-	            str += "\n\nキャッシュから取得しました" + "\nデータ取得時刻: " + this.timestamp.format("YYYY-MM-DDTHH:mm:ssZZ");
-	        }
-	        return str;
-	    };
-	    PowerLevel.prototype.toJSONString = function () {
-	        return JSON.stringify({
-	            attack: this.atk,
-	            intelligence: this.int,
-	            agility: this.agi,
-	            cached: this.cached,
-	            timestamp: this.timestamp.unix()
-	        });
-	    };
-	    return PowerLevel;
-	})();
-	exports.PowerLevel = PowerLevel;
-
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -7542,7 +7491,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module), (function() { return this; }())))
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8626,6 +8575,57 @@
 	 */
 	
 	module.exports = request;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	///<reference path='../typings/node/node.d.ts'/>
+	///<reference path='../typings/moment/moment.d.ts'/>
+	/**
+	 * http://dragonball.wikia.com/wiki/Power_level
+	 */
+	var PowerLevel = (function () {
+	    function PowerLevel(atk, int, agi, cached, timestamp) {
+	        if (cached === void 0) { cached = false; }
+	        if (timestamp === void 0) { timestamp = (__webpack_require__(10))(); }
+	        this.atk = atk;
+	        this.int = int;
+	        this.agi = agi;
+	        this.cached = cached;
+	        this.timestamp = timestamp;
+	        // TODO: moment usage
+	    }
+	    PowerLevel.fromJSONString = function (json) {
+	        var obj = JSON.parse(json);
+	        // TODO: validation
+	        // TODO: moment usage
+	        return new PowerLevel(obj.attack, obj.intelligence, obj.agility, !!obj.cached, (__webpack_require__(10)).unix(obj.timestamp));
+	    };
+	    PowerLevel.prototype.total = function () {
+	        return this.atk + this.int + this.agi;
+	    };
+	    PowerLevel.prototype.toString = function () {
+	        // TODO: i18n
+	        var str = "戦闘力: " + this.total() + "\n" + "攻撃力: " + this.atk + " 知力: " + this.int + " すばやさ: " + this.agi;
+	        if (this.cached) {
+	            str += "\n\nキャッシュから取得しました" + "\nデータ取得時刻: " + this.timestamp.format("YYYY-MM-DDTHH:mm:ssZZ");
+	        }
+	        return str;
+	    };
+	    PowerLevel.prototype.toJSONString = function () {
+	        return JSON.stringify({
+	            attack: this.atk,
+	            intelligence: this.int,
+	            agility: this.agi,
+	            cached: this.cached,
+	            timestamp: this.timestamp.unix()
+	        });
+	    };
+	    return PowerLevel;
+	})();
+	exports.PowerLevel = PowerLevel;
 
 
 /***/ },
