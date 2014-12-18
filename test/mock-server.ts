@@ -1,4 +1,5 @@
 var express = require('express')
+var errorhandler = require('errorhandler');
 var _ = require('lodash')
 var app = express()
 
@@ -6,6 +7,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
     return next()
 })
+app.use(errorhandler())
 
 app.get('/users/hello/repos', (req, res) => {
     res.send([
