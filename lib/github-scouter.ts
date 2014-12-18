@@ -12,8 +12,9 @@ class GithubScouter {
     private octokit: Octokit
     
     constructor(private baseUrl: string = API_URL,
-                private cacheBaseUrl: string = CACHE_URL) {
-        this.octokit = new (require('./octokit.ts')).Octokit(baseUrl)
+                private cacheBaseUrl: string = CACHE_URL,
+                private token: string = undefined) {
+        this.octokit = new (require('./octokit.ts')).Octokit(baseUrl, token)
     }
 
     measure(userName: string, onSuccess: (powerLevel: PowerLevel) => any, onFailure: (error) => any) {

@@ -113,4 +113,11 @@ describe("Octokit", () => {
             expect(octokit.validOrganizationName("foo/bar3")).toBe(false)
         })
     })
+
+    describe("#validToken", () => {
+        it("works!", () => {
+            expect(octokit.validToken("0123456789abcdefABCDEF")).toBe(true)
+            expect(octokit.validToken("abc\ndef")).toBe(false)
+        })
+    })
 })

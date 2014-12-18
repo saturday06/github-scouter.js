@@ -13,9 +13,11 @@ var argv = require('yargs')
     .boolean('cache')
     .default('cache', true)
     .describe('cache', 'Use the cache server (' + m.CACHE_URL + ')')
+    .string('token')
+    .describe('token', 'Personal API Access Token')
     .argv
 
-var scouter = new m.GithubScouter(m.API_URL, argv.cache ? m.CACHE_URL : null)
+var scouter = new m.GithubScouter(m.API_URL, argv.cache ? m.CACHE_URL : null, argv.token)
 scouter.measure(argv._, (powerLevel) => {
     if (argv.json) {
         console.log(powerLevel.toJSONString())

@@ -8,6 +8,9 @@ class Octokit {
     private perPage = 100
 
     constructor(private baseUrl, private token: string = undefined) {
+        if (this.token && !this.validToken(this.token)) {
+            throw new Error("Invalid token")
+        }
         this.agent = require('superagent')
     }
 
@@ -15,7 +18,7 @@ class Octokit {
         var result = {}
         result["Accept"] = "application/vnd.github.v3+json"
         if (this.token) {
-            result["Authorization"] = this.token
+            result["Authorization"] = "token " + this.token
         }
         return result
     }
@@ -112,6 +115,10 @@ class Octokit {
 
     validOrganizationName(name: string): boolean {
         return this.validUserName(name)
+    }
+
+    validToken(token: string): boolean {
+        return /^[a-fA-F0-9]+$/.test(token)
     }
 }
 
