@@ -2,8 +2,12 @@ var express = require('express')
 var _ = require('lodash')
 var app = express()
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    return next()
+})
+
 app.get('/users/hello/repos', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send([
         {id: 1, private: false, fork: false, stargazers_count: 0, language: "Java", forks_count: 0},
         {id: 2, private: true,  fork: false, stargazers_count: 2, language: "Java", forks_count: 2},
@@ -14,12 +18,10 @@ app.get('/users/hello/repos', (req, res) => {
 })
 
 app.get('/users/norepos/repos', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send([])
 })
 
 app.get('/users/hello/orgs', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send([
         {login: 'cookvideo'},
         {login: 'nicopad'},
@@ -27,7 +29,6 @@ app.get('/users/hello/orgs', (req, res) => {
 })
 
 app.get('/users/world/repos', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     var all = _.range(50).map((i) => {
         return {id: i, private: false, fork: false, stargazers_count: 0, language: "Java", forks_count: 0}
     })
@@ -35,45 +36,37 @@ app.get('/users/world/repos', (req, res) => {
 })
 
 app.get('/users/world/orgs', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send([])
 })
 
 app.get('/orgs/cookvideo', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send({public_repos: 10})
 })
 
 app.get('/orgs/cookvideo/members', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send([{id: 1}, {id: 2}, {id: 3}])
 })
 
 app.get('/orgs/nicopad', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send({public_repos: 5})
 })
 
 app.get('/orgs/nicopad/members', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     var all = _.range(50).map((i) => {return {id: i}})
     res.send(all)
 })
 
 app.get('/users/ratelimited-cached/repos', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     // TODO: header
     res.status(403).send('Oops!')
 })
 
 app.get('/users/ratelimited-nocache/repos', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     // TODO: header
     res.status(403).send('Oops!')
 })
 
 app.get('/cache/powerLevels/ratelimited-cached', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.send({
         attack: 1000,
         intelligence: 2000,
@@ -83,7 +76,6 @@ app.get('/cache/powerLevels/ratelimited-cached', (req, res) => {
 })
 
 app.get('/cache/powerLevels/ratelimited-nocache', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*')
     res.status(404).send('Oops!')
 })
 
