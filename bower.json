@@ -1,7 +1,7 @@
 {
   "name": "github-scouter",
   "main": "browser/github-scouter.js",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "homepage": "https://github.com/saturday06/github-scouter.js",
   "authors": [
     "Isamu Mogi <isamu@leafytree.jp>"
