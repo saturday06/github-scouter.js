@@ -61,12 +61,14 @@
 	 * http://dragonball.wikia.com/wiki/Scouter
 	 */
 	var GithubScouter = (function () {
-	    function GithubScouter(baseUrl, cacheBaseUrl) {
+	    function GithubScouter(baseUrl, cacheBaseUrl, token) {
 	        if (baseUrl === void 0) { baseUrl = API_URL; }
 	        if (cacheBaseUrl === void 0) { cacheBaseUrl = CACHE_URL; }
+	        if (token === void 0) { token = undefined; }
 	        this.baseUrl = baseUrl;
 	        this.cacheBaseUrl = cacheBaseUrl;
-	        this.octokit = new (__webpack_require__(2)).Octokit(baseUrl);
+	        this.token = token;
+	        this.octokit = new (__webpack_require__(2)).Octokit(baseUrl, token);
 	    }
 	    GithubScouter.prototype.measure = function (userName, onSuccess, onFailure) {
 	        var analyzer = new (__webpack_require__(3)).Analyzer(this.octokit, userName, onSuccess, onFailure, this.cacheBaseUrl);
@@ -92,13 +94,16 @@
 	        this.baseUrl = baseUrl;
 	        this.token = token;
 	        this.perPage = 100;
+	        if (this.token && !this.validToken(this.token)) {
+	            throw new Error("Invalid token");
+	        }
 	        this.agent = __webpack_require__(6);
 	    }
 	    Octokit.prototype.requestHeaders = function () {
 	        var result = {};
 	        result["Accept"] = "application/vnd.github.v3+json";
 	        if (this.token) {
-	            result["Authorization"] = this.token;
+	            result["Authorization"] = "token " + this.token;
 	        }
 	        return result;
 	    };
@@ -187,6 +192,9 @@
 	    Octokit.prototype.validOrganizationName = function (name) {
 	        return this.validUserName(name);
 	    };
+	    Octokit.prototype.validToken = function (token) {
+	        return /^[a-fA-F0-9]+$/.test(token);
+	    };
 	    return Octokit;
 	})();
 	exports.Octokit = Octokit;
@@ -222,7 +230,7 @@
 	                }
 	                try {
 	                    // TODO: ...
-	                    var powerLevel = new (__webpack_require__(4)).PowerLevel(response.text);
+	                    var powerLevel = new (__webpack_require__(4)).PowerLevel.fromJSONString(response.text);
 	                    powerLevel.cached = true;
 	                    onSuccess(powerLevel);
 	                }
