@@ -1,3 +1,5 @@
+///<reference path='../typings/node/node.d.ts'/>
+
 var express = require('express')
 var errorhandler = require('errorhandler');
 var _ = require('lodash')
