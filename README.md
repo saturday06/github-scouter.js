@@ -33,6 +33,5 @@ $ github-scouter saturday06
 ```sh
 npm install
 export PATH="$PWD/node_modules/.bin:$PATH"
-tsd reinstall
 gulp
 ```
