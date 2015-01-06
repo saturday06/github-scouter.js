@@ -1,13 +1,15 @@
 ///<reference path='../typings/node/node.d.ts'/>
 ///<reference path='../typings/jasmine/jasmine.d.ts'/>
 
+import Octokit = require("../lib/octokit")
+
 describe("Octokit", () => {
     var server
     var octokit
 
     beforeEach(() => {
         var util = require("util");
-        octokit = new (require("../lib/octokit.ts")).Octokit('http://127.0.0.1:3000')
+        octokit = new Octokit('http://127.0.0.1:3000')
     })
 
     describe("#repositories", () => {

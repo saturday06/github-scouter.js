@@ -122,4 +122,4 @@ class Octokit {
     }
 }
 
-exports.Octokit = Octokit
+export = Octokit

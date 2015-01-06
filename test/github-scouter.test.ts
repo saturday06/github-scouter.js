@@ -1,6 +1,8 @@
 ///<reference path='../typings/node/node.d.ts'/>
 ///<reference path='../typings/jasmine/jasmine.d.ts' />
 
+import GithubScouter = require('../lib/github-scouter')
+
 describe("GithubScouter", () => {
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000
@@ -8,7 +10,7 @@ describe("GithubScouter", () => {
 
     describe("#measure", () => {
         it("measures target's power level", (done) => {
-            var scouter = new (require("../lib/github-scouter.ts")).GithubScouter('http://localhost:3000')
+            var scouter = new GithubScouter('http://localhost:3000')
             scouter.measure("hello", (powerLevel) => {
                 expect(powerLevel.atk).toBe(43)
                 expect(powerLevel.int).toBe(6)
@@ -23,7 +25,7 @@ describe("GithubScouter", () => {
 
         it("measures target's power level (real target!)", (done) => {
             return done()
-            var scouter = new (require("../lib/github-scouter.ts")).GithubScouter()
+            var scouter = new GithubScouter()
             scouter.measure("saturday06", (powerLevel) => {
                 console.log(powerLevel)
                 done()

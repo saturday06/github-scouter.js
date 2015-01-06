@@ -1,7 +1,7 @@
 ///<reference path='../typings/node/node.d.ts'/>
-///<reference path='octokit.ts'/>
-///<reference path='power-level.ts'/>
 
+import PowerLevel = require('./power-level')
+import Octokit = require('./octokit')
 var _ = require('lodash')
 
 class Analyzer {
@@ -29,8 +29,7 @@ class Analyzer {
                         return
                     }
                     try {
-                        // TODO: ...
-                        var powerLevel = new (require('./power-level.ts')).PowerLevel.fromJSONString(response.text)
+                        var powerLevel = PowerLevel.fromJSONString(response.text)
                         powerLevel.cached = true
                         onSuccess(powerLevel)
                     } catch (e) {
@@ -124,7 +123,7 @@ class Analyzer {
         this.atk((atk) => {
             this.int((int) => {
                 this.agi((agi) => {
-                    this.onSuccess(new (require('./power-level.ts')).PowerLevel(atk, int, agi))
+                    this.onSuccess(new PowerLevel(atk, int, agi))
                 })
             })
         })
@@ -132,4 +131,4 @@ class Analyzer {
     }
 }
 
-exports.Analyzer = Analyzer
+export = Analyzer

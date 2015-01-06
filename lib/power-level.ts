@@ -46,4 +46,4 @@ class PowerLevel {
     }
 }
 
-exports.PowerLevel = PowerLevel
+export = PowerLevel

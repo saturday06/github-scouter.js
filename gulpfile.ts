@@ -17,7 +17,7 @@ var src = ['lib/*.ts', 'test/*.ts']
 var webpackConfig = {
     module: {
         loaders: [
-            { test: /\.ts$/, loader: "typescript-loader" }
+            { test: /\.ts$/, loader: "typescript-loader?module=commonjs" }
         ]
     }
 }

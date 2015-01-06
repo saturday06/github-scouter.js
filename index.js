@@ -1,3 +1,4 @@
 require('typescript-require')();
 
-module.exports = new (require("./lib/github-scouter.ts")).GithubScouter();
+var GithubScouter = require("./lib/github-scouter.ts");
+module.exports = new GithubScouter();
