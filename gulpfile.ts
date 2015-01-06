@@ -12,6 +12,7 @@ var sleep = require('sleep')
 var webpack = require('gulp-webpack')
 var rename = require('gulp-rename')
 var uglify = require('gulp-uglify')
+var ignore = require('gulp-ignore')
 var _ = require('lodash')
 var src = ['lib/*.ts', 'test/*.ts']
 var webpackConfig = {
@@ -109,6 +110,7 @@ gulp.task('test-node', ['tsc'], () => {
 
 gulp.task('tsc', ['tsd'], () => {
     return gulp.src(src)
+        .pipe(ignore.exclude(/\/test\/run-browser\.ts$/))
         .pipe(tsc())
         .pipe(gulp.dest('.'))
 })

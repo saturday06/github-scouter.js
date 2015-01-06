@@ -22,6 +22,7 @@
     "express": "^4.10.7",
     "fs": "0.0.2",
     "gulp": "^3.8.10",
+    "gulp-ignore": "^1.2.1",
     "gulp-jasmine": "^1.0.1",
     "gulp-karma": "0.0.4",
     "gulp-rename": "^1.2.0",
