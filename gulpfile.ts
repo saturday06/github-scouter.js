@@ -95,7 +95,7 @@ gulp.task('test-browser', ['tsc'], (done) => {
 gulp.task('test-node', ['tsc'], () => {
     var server = start_mock_server()
     return gulp
-        .src('test/run.js')
+        .src('test/run-node.js')
         .pipe(jasmine())
         .on('error', function (error) {
             server.kill('SIGINT')
