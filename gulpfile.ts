@@ -110,7 +110,7 @@ gulp.task('test-node', ['tsc'], () => {
 
 gulp.task('tsc', ['tsd'], () => {
     return gulp.src(src)
-        .pipe(ignore.exclude(/\/test\/run-browser\.ts$/))
+        .pipe(ignore.exclude(/[\/\\]test[\/\\]run-browser\.ts$/))
         .pipe(tsc())
         .pipe(gulp.dest('.'))
 })
