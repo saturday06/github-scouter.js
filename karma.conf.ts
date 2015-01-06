@@ -2,7 +2,7 @@
 
 module.exports = (config) => {
     config.set({
-        frameworks: ['jasmine', 'mocha'],
+        frameworks: ['webpack', 'jasmine', 'mocha'],
         files: ['test/*.test.ts'],
         browsers: ['PhantomJS'],
         browserNoActivityTimeout: 100 * 1000,
