@@ -12,7 +12,7 @@ class Analyzer {
                 private userName: string,
                 private onSuccess: (powerLevel: PowerLevel) => any,
                 private onFailure: (error) => any,
-                private cacheBaseUrl: string) {
+                private cacheBaseUrl: string = undefined) {
         this.agent = require('superagent')
         this.onFailure = (error) => {
             if (!cacheBaseUrl || error.status != 403) {
