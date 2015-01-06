@@ -3,13 +3,13 @@
 module.exports = (config) => {
     config.set({
         frameworks: ['webpack', 'jasmine', 'mocha'],
-        files: ['test/*.test.ts'],
+        files: ['test/run-browser.ts'],
         browsers: ['PhantomJS'],
         browserNoActivityTimeout: 100 * 1000,
         singleRun: true,
 
         preprocessors: {
-            'test/*.test.ts': ['webpack']
+            'test/run-browser.ts': ['webpack']
         }
     });
 };
