@@ -31,7 +31,7 @@ $ github-scouter saturday06
 # Development
 
 ```sh
-npm install
-export PATH="$PWD/node_modules/.bin:$PATH"
-gulp
+$ npm install
+$ export PATH="$PWD/node_modules/.bin:$PATH"
+$ gulp
 ```
